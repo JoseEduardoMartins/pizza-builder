@@ -1,39 +1,29 @@
 "use client";
 
-import { PizzaContext } from "@/contexts/PizzaContext";
-import { ChangeEvent, useContext } from "react";
-
-const sizes = [
-  {
-    id: 1,
-    name: "Pequena",
-    price: 20.2,
-    prepTime: 15,
-  },
-  {
-    id: 2,
-    name: "Média",
-    price: 30.3,
-    prepTime: 20,
-  },
-  {
-    id: 3,
-    name: "Grande",
-    price: 40.0,
-    prepTime: 25,
-  },
-];
+import { PizzaContext, PizzaOptions } from "@/contexts/PizzaContext";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
+import { find } from "@/services/size-service";
 
 export const PizzaSizeSelector = () => {
   const { size, setSize } = useContext(PizzaContext);
+  const [sizes, setSizes] = useState<PizzaOptions[]>([]);
 
   const handleSizeChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const id = event.target.value;
 
     const [selectedSize] = sizes.filter((size) => size.id === Number(id));
 
-    setSize(selectedSize.name);
+    setSize(selectedSize);
   };
+
+  const loadSizes = async () => {
+    const response = await find();
+    setSizes(response);
+  };
+
+  useEffect(() => {
+    loadSizes();
+  }, []);
 
   return (
     <div className="mb-4">

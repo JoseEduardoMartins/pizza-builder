@@ -1,31 +1,12 @@
 "use client";
 
-import { ChangeEvent, useContext } from "react";
-import { PizzaContext } from "@/contexts/PizzaContext";
-
-const flavors = [
-  {
-    id: 1,
-    name: "Calabresa",
-    price: 0,
-    prepTime: 0,
-  },
-  {
-    id: 2,
-    name: "Marguerita",
-    price: 0,
-    prepTime: 0,
-  },
-  {
-    id: 3,
-    name: "Portuguesa",
-    price: 0,
-    prepTime: 5,
-  },
-];
+import { PizzaContext, PizzaOptions } from "@/contexts/PizzaContext";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
+import { find } from "@/services/flavor-service";
 
 export const PizzaFlavorSelector = () => {
   const { size, flavor, setFlavor } = useContext(PizzaContext);
+  const [flavors, setFlavors] = useState<PizzaOptions[]>([]);
 
   const handleFlavorChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const id = event.target.value;
@@ -34,8 +15,17 @@ export const PizzaFlavorSelector = () => {
       (flavor) => flavor.id === Number(id)
     );
 
-    setFlavor(selectedFlavor.name);
+    setFlavor(selectedFlavor);
   };
+
+  const loadFlavors = async () => {
+    const response = await find();
+    setFlavors(response);
+  };
+
+  useEffect(() => {
+    loadFlavors();
+  }, []);
 
   return (
     <div className="mb-4">

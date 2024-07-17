@@ -1,81 +1,56 @@
 "use client";
 
-import { ChangeEvent, useContext } from "react";
-import { PizzaContext } from "@/contexts/PizzaContext";
+import { PizzaContext, PizzaOptions } from "@/contexts/PizzaContext";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
+import { find } from "@/services/customization-service";
 
 export const PizzaCustomization = () => {
-  const {
-    customizations,
-    setCustomizations,
-    price,
-    setPrice,
-    prepTime,
-    setPrepTime,
-  } = useContext(PizzaContext);
+  const { flavor, customizations, setCustomizations } =
+    useContext(PizzaContext);
+  const [personalizations, setPersonalizations] = useState<PizzaOptions[]>([]);
 
   const handleCustomizationChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const customization = event.target.value;
+    const id = event.target.value;
     const isChecked = event.target.checked;
 
-    let newPrice = price;
-    let newPrepTime = prepTime;
-
     if (isChecked) {
-      if (customization === "extraBacon") {
-        newPrice += 3;
-      } else if (customization === "bordaRecheada") {
-        newPrice += 5;
-        newPrepTime += 5;
-      }
-
-      setCustomizations([...customizations, customization]);
-    } else {
-      if (customization === "extraBacon") {
-        newPrice -= 3;
-      } else if (customization === "bordaRecheada") {
-        newPrice -= 5;
-        newPrepTime -= 5;
-      }
-
-      setCustomizations(
-        customizations.filter((item) => item !== customization)
+      const [prosonalization] = personalizations.filter(
+        (customization) => customization.id === Number(id)
       );
-    }
 
-    setPrice(newPrice);
-    setPrepTime(newPrepTime);
+      setCustomizations([...customizations, prosonalization]);
+    } else {
+      const restProsonalizations = customizations.filter(
+        (customization) => customization.id !== Number(id)
+      );
+
+      setCustomizations(restProsonalizations);
+    }
   };
+
+  const loadCustomizations = async () => {
+    const response = await find();
+    setPersonalizations(response);
+  };
+
+  useEffect(() => {
+    loadCustomizations();
+  }, []);
 
   return (
     <div className="mb-4">
       <label>Personalize sua pizza:</label>
-      <div>
-        <input
-          type="checkbox"
-          id="extraBacon"
-          value="extraBacon"
-          onChange={handleCustomizationChange}
-        />
-        <label>Extra bacon (+R$ 3,00)</label>
-      </div>
-      <div>
-        <input
-          type="checkbox"
-          id="semCebola"
-          value="semCebola"
-          onChange={handleCustomizationChange}
-        />
-        <label>Sem cebola</label>
-      </div>
-      <div>
-        <input
-          type="checkbox"
-          id="bordaRecheada"
-          value="bordaRecheada"
-          onChange={handleCustomizationChange}
-        />
-        <label>Borda recheada (+R$ 5,00 e +5 minutos)</label>
-      </div>
+      {personalizations?.map((prosonalization) => (
+        <div key={prosonalization.id}>
+          <input
+            type="checkbox"
+            value={prosonalization.id}
+            onChange={handleCustomizationChange}
+            disabled={!flavor}
+          />
+          <label>{prosonalization.name}</label>
+        </div>
+      ))}
     </div>
   );
 };
