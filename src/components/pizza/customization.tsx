@@ -1,10 +1,11 @@
 "use client";
 
 import { PizzaContext, PizzaOptions } from "@/contexts/PizzaContext";
-import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { find } from "@/services/customization-service";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
+import { Input } from "../input";
 
-export const PizzaCustomization = () => {
+export const Customization = () => {
   const { flavor, customizations, setCustomizations } =
     useContext(PizzaContext);
   const [personalizations, setPersonalizations] = useState<PizzaOptions[]>([]);
@@ -38,19 +39,13 @@ export const PizzaCustomization = () => {
   }, []);
 
   return (
-    <div className="mb-4">
-      <label>Personalize sua pizza:</label>
-      {personalizations?.map((prosonalization) => (
-        <div key={prosonalization.id}>
-          <input
-            type="checkbox"
-            value={prosonalization.id}
-            onChange={handleCustomizationChange}
-            disabled={!flavor}
-          />
-          <label>{prosonalization.name}</label>
-        </div>
-      ))}
-    </div>
+    <Input
+      label="Personalize sua pizza:"
+      type="checkbox"
+      onChange={handleCustomizationChange}
+      options={personalizations}
+      isDisabled={!flavor}
+      isSelected={false}
+    />
   );
 };

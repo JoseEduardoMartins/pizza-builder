@@ -1,10 +1,11 @@
 "use client";
 
 import { PizzaContext, PizzaOptions } from "@/contexts/PizzaContext";
-import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { find } from "@/services/flavor-service";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
+import { Input } from "../input";
 
-export const PizzaFlavorSelector = () => {
+export const Flavor = () => {
   const { size, flavor, setFlavor } = useContext(PizzaContext);
   const [flavors, setFlavors] = useState<PizzaOptions[]>([]);
 
@@ -28,18 +29,13 @@ export const PizzaFlavorSelector = () => {
   }, []);
 
   return (
-    <div className="mb-4">
-      <label>Escolha o sabor da pizza:</label>
-      <select onChange={handleFlavorChange} disabled={!size}>
-        <option disabled={!!flavor} value="0">
-          Selecione...
-        </option>
-        {flavors?.map((flavor) => (
-          <option key={flavor.id} value={flavor.id}>
-            {flavor.name}
-          </option>
-        ))}
-      </select>
-    </div>
+    <Input
+      label="Escolha o sabor da pizza:"
+      type="select"
+      onChange={handleFlavorChange}
+      options={flavors}
+      isDisabled={!size}
+      isSelected={!!flavor}
+    />
   );
 };

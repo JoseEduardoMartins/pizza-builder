@@ -1,10 +1,11 @@
 "use client";
 
 import { PizzaContext, PizzaOptions } from "@/contexts/PizzaContext";
-import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { find } from "@/services/size-service";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
+import { Input } from "../input";
 
-export const PizzaSizeSelector = () => {
+export const Size = () => {
   const { size, setSize } = useContext(PizzaContext);
   const [sizes, setSizes] = useState<PizzaOptions[]>([]);
 
@@ -26,18 +27,13 @@ export const PizzaSizeSelector = () => {
   }, []);
 
   return (
-    <div className="mb-4">
-      <label>Escolha o tamanho da pizza:</label>
-      <select onChange={handleSizeChange}>
-        <option disabled={!!size} value="0">
-          Selecione...
-        </option>
-        {sizes?.map((size) => (
-          <option key={size.id} value={size.id}>
-            {size.name}
-          </option>
-        ))}
-      </select>
-    </div>
+    <Input
+      label="Escolha o tamanho da pizza:"
+      type="select"
+      onChange={handleSizeChange}
+      options={sizes}
+      isDisabled={false}
+      isSelected={!!size}
+    />
   );
 };

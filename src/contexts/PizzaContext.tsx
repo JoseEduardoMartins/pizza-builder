@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode, createContext, useLayoutEffect, useState } from "react";
+import { generateRandomText } from "@/utils/string-utils";
 
 export type PizzaOptions = {
   id: number;
@@ -9,7 +10,8 @@ export type PizzaOptions = {
   time: number;
 };
 
-type PizzaContextType = {
+export type PizzaContextType = {
+  id?: string;
   size: PizzaOptions | null;
   setSize: (value: PizzaOptions | null) => void;
   flavor: PizzaOptions | null;
@@ -29,6 +31,7 @@ type PizzaProviderType = {
 };
 
 export const PizzaProvider = ({ children }: PizzaProviderType) => {
+  const [id, setId] = useState<string>();
   const [size, setSize] = useState<PizzaOptions | null>(null);
   const [flavor, setFlavor] = useState<PizzaOptions | null>(null);
   const [customizations, setCustomizations] = useState<Array<PizzaOptions>>([]);
@@ -63,9 +66,16 @@ export const PizzaProvider = ({ children }: PizzaProviderType) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [size, flavor, customizations]);
 
+  useLayoutEffect(() => {
+    const response = generateRandomText(6, "123456789");
+    setId(response);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <PizzaContext.Provider
       value={{
+        id,
         size,
         setSize,
         flavor,
