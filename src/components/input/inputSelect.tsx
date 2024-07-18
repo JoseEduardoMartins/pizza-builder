@@ -1,48 +1,47 @@
-import { ChangeEventHandler } from "react";
+import { useFormContext } from "react-hook-form";
 
 type OptionType = {
-  id: number;
+  label: string;
+  value: string | number;
+};
+
+export type InputSelectType = {
   name: string;
-};
-
-type InputSelectType = {
-  onChange: ChangeEventHandler<HTMLSelectElement>;
   options: OptionType[];
-  isDisabled: boolean;
-  isSelected: boolean;
+  required?: boolean;
 };
 
-export const InputSelect = ({
-  onChange,
-  options,
-  isDisabled,
-  isSelected,
-}: InputSelectType) => (
-  <div
-    className={`
-        flex
-        justify-between
-        items-center
-        rounded-lg
-        border
-        border-zinc-600
-        text-white
-        mt-1 p-4 max-h-10
-      `}
-  >
-    <select
-      className="w-full border-0 bg-transparent outline-0"
-      onChange={onChange}
-      disabled={isDisabled}
+export const InputSelect = ({ name, options, required }: InputSelectType) => {
+  const { register } = useFormContext();
+
+  return (
+    <div
+      className={`
+          flex
+          justify-between
+          items-center
+          rounded-lg
+          border
+          border-zinc-600
+          text-white
+          mt-1 p-4 max-h-10
+        `}
     >
-      <option className="bg-black" disabled={isSelected} value="0">
-        Selecione...
-      </option>
-      {options?.map((options) => (
-        <option className="bg-black" key={options.id} value={options.id}>
-          {options.name}
+      <select
+        className="w-full border-0 bg-transparent outline-0 text-white"
+        {...register(name, {
+          required,
+        })}
+      >
+        <option value="" className="text-black">
+          Selecione...
         </option>
-      ))}
-    </select>
-  </div>
-);
+        {options?.map((option, index) => (
+          <option key={index} value={option.value} className="text-black">
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+};

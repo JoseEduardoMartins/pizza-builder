@@ -1,4 +1,4 @@
-import { Input } from "./input";
+import { Input } from "../input";
 import { InputCheckBox } from "./inputCheckbox";
 import { InputSelect } from "./inputSelect";
 

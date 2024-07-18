@@ -1,15 +1,30 @@
 "use client";
 
 import { ReactNode, createContext, useLayoutEffect, useState } from "react";
-import { PizzaContextType } from "./PizzaContext";
 
-export type OrderContextTpe = {
-  items: PizzaContextType[];
+export type OptionType = {
+  id: number;
+  name: string;
   price: number;
   time: number;
-  addItem: (item: PizzaContextType) => void;
-  editItem: (item: PizzaContextType) => void;
-  removeItem: (item: PizzaContextType) => void;
+};
+
+export type PizzaType = {
+  id: string;
+  size: OptionType;
+  flavor: OptionType;
+  customizations: OptionType[];
+  price: number;
+  time: number;
+};
+
+export type OrderContextTpe = {
+  items: PizzaType[];
+  price: number;
+  time: number;
+  addItem: (item: PizzaType) => void;
+  editItem: (item: PizzaType) => void;
+  removeItem: (item: PizzaType) => void;
 };
 
 export const OrderContext = createContext({} as OrderContextTpe);
@@ -19,18 +34,18 @@ export type OrderProviderType = {
 };
 
 export const OrderProvider = ({ children }: OrderProviderType) => {
-  const [items, setItems] = useState<PizzaContextType[]>([]);
+  const [items, setItems] = useState<PizzaType[]>([]);
   const [price, setPrice] = useState<number>(0);
   const [time, setTime] = useState<number>(0);
 
-  const addItem = (data: PizzaContextType) => setItems([...items, data]);
+  const addItem = (data: PizzaType) => setItems([...items, data]);
 
-  const editItem = (data: PizzaContextType) => {
+  const editItem = (data: PizzaType) => {
     const response = items?.map((item) => (item.id === data.id ? data : item));
     setItems(response);
   };
 
-  const removeItem = (data: PizzaContextType) => {
+  const removeItem = (data: PizzaType) => {
     const response = items?.filter((item) => item.id !== data.id);
     setItems(response);
   };
