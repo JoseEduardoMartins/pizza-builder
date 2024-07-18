@@ -36,10 +36,6 @@ cd test-frontend-assemble-pizza
   npm install
   ```
 
-#### Opção 2: Utilizando Docker
-
-- Certifique-se de configurar corretamente as variáveis de ambiente no arquivo `docker-compose.yml` para conectar ao back-end.
-
 ### 4. Executar a Aplicação
 
 #### Opção 1: Local
