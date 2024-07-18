@@ -1,7 +1,7 @@
-import { PizzaOptions } from "@/contexts/PizzaContext";
+import { OptionType } from "@/contexts/OrderContext";
 import { delay } from "@/utils/delay-utils";
 
-const customizations: PizzaOptions[] = [
+const customizations: OptionType[] = [
   {
     id: 1,
     name: "Extra bacon (+R$ 3,00)",
@@ -22,7 +22,7 @@ const customizations: PizzaOptions[] = [
   },
 ];
 
-export const find = async (): Promise<PizzaOptions[]> => {
+export const find = async (): Promise<OptionType[]> => {
   await delay(1000);
   return customizations;
 };

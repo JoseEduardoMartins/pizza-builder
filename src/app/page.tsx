@@ -30,7 +30,7 @@ export default function Home() {
               <OrderDetails price={price} time={time} />
             ) : (
               <div className="mt-4 pt-4 border-t flex flex-col gap-2 text-center">
-                <h4>Nenhuma pizza no seu pedido</h4>
+                <h4>Seu pedido está vazio</h4>
               </div>
             )}
           </div>
