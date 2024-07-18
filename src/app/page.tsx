@@ -19,7 +19,7 @@ export default function Home() {
           <div className="flex flex-col gap-y-4">
             <h2 className="text-white text-xl font-bold flex flex-row justify-between items-center">
               Pedido
-              <Link href="/pizza" theme="emerald">
+              <Link href="/pizza" theme="emerald" size="small">
                 Adicionar
               </Link>
             </h2>
@@ -29,7 +29,7 @@ export default function Home() {
             {items.length ? (
               <OrderDetails price={price} time={time} />
             ) : (
-              <div className="mt-4 pt-4 border-t flex flex-col gap-2">
+              <div className="mt-4 pt-4 border-t flex flex-col gap-2 text-center">
                 <h4>Nenhuma pizza no seu pedido</h4>
               </div>
             )}
