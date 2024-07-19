@@ -6,8 +6,8 @@ import { OrderProvider } from "@/contexts/OrderContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Monte sua pizza",
-  description: "Monte sua pizza",
+  title: "Pizzaria Voors",
+  description: "Pizzaria Voors",
 };
 
 export default function RootLayout({
