@@ -1,5 +1,5 @@
-import { OptionType } from "@/contexts/OrderContext";
 import { delay } from "@/utils/delay-utils";
+import { OptionType } from "./pizza-service";
 
 const sizes: OptionType[] = [
   {

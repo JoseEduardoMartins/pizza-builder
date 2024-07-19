@@ -7,7 +7,7 @@ import { OrderContext } from "@/contexts/OrderContext";
 import { useContext } from "react";
 
 export default function Home() {
-  const { items, price, time } = useContext(OrderContext);
+  const { items, removeItem, price, time } = useContext(OrderContext);
 
   return (
     <main className="w-full min-h-screen py-4 px-4">
@@ -24,7 +24,12 @@ export default function Home() {
               </Link>
             </h2>
             {items?.map((item, index) => (
-              <PizzaDetails key={index} index={index} item={item} />
+              <PizzaDetails
+                key={index}
+                index={index}
+                item={item}
+                removeItem={removeItem}
+              />
             ))}
             {items.length ? (
               <OrderDetails price={price} time={time} />

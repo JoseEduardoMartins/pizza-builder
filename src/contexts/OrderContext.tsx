@@ -1,22 +1,7 @@
 "use client";
 
+import { PizzaType } from "@/services/pizza-service";
 import { ReactNode, createContext, useLayoutEffect, useState } from "react";
-
-export type OptionType = {
-  id: number;
-  name: string;
-  price: number;
-  time: number;
-};
-
-export type PizzaType = {
-  id: string;
-  size: OptionType;
-  flavor: OptionType;
-  customizations: OptionType[];
-  price: number;
-  time: number;
-};
 
 export type OrderContextTpe = {
   items: PizzaType[];
