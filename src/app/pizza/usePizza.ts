@@ -51,24 +51,36 @@ export const usePizza = () => {
       size,
       flavor,
       customizations: customizationList,
-      price:
-        (size?.price || 0) +
-        (flavor?.price || 0) +
-        customizationList.reduce((total, customization) => {
-          return total + customization.price;
-        }, 0),
-      time:
-        (size?.time || 0) +
-        (flavor?.time || 0) +
-        customizationList.reduce((total, customization) => {
-          return total + customization.time;
-        }, 0),
+      price: calculatePrice(size, flavor, customizationList),
+      time: calculateTime(size, flavor, customizationList),
     };
 
     addItem(pizza);
 
     router.push("/");
   };
+
+  const calculatePrice = (
+    size: OptionType,
+    flavor: OptionType,
+    customizationList: OptionType[]
+  ) =>
+    size.price +
+    flavor.price +
+    customizationList.reduce((total, customization) => {
+      return total + customization.price;
+    }, 0);
+
+  const calculateTime = (
+    size: OptionType,
+    flavor: OptionType,
+    customizationList: OptionType[]
+  ) =>
+    size.time +
+    flavor.time +
+    customizationList.reduce((total, customization) => {
+      return total + customization.time;
+    }, 0);
 
   const loadSizes = async () => {
     const response = await findSize();
