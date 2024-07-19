@@ -1,5 +1,5 @@
 {
-  "name": "test-frontend-assemble-pizza",
+  "name": "pizza-builder",
   "version": "0.1.0",
   "description": "Aplicação web para criação e personalização de pizzas usando React, TypeScript e Tailwind CSS.",
   "private": true,
