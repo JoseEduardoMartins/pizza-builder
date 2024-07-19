@@ -9,10 +9,24 @@ export type InputSelectType = {
   name: string;
   options: OptionType[];
   required?: boolean;
+  dependencies?: Array<string>;
 };
 
-export const InputSelect = ({ name, options, required }: InputSelectType) => {
-  const { register } = useFormContext();
+export const InputSelect = ({
+  name,
+  options,
+  required,
+  dependencies,
+}: InputSelectType) => {
+  const { register, watch } = useFormContext();
+
+  const values =
+    dependencies && dependencies.length > 0 ? watch(dependencies) : [];
+
+  const isDisabled =
+    dependencies && dependencies.length > 0
+      ? values.some((value) => !value)
+      : false;
 
   return (
     <div
@@ -32,6 +46,7 @@ export const InputSelect = ({ name, options, required }: InputSelectType) => {
         {...register(name, {
           required,
         })}
+        disabled={isDisabled}
       >
         <option value="" className="text-black">
           Selecione...

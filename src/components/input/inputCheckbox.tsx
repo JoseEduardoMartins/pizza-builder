@@ -9,10 +9,24 @@ export type CheckBoxType = {
   name: string;
   options: OptionType[];
   required?: boolean;
+  dependencies?: Array<string>;
 };
 
-export const InputCheckBox = ({ name, options, required }: CheckBoxType) => {
-  const { register } = useFormContext();
+export const InputCheckBox = ({
+  name,
+  options,
+  required,
+  dependencies,
+}: CheckBoxType) => {
+  const { register, watch } = useFormContext();
+
+  const values =
+    dependencies && dependencies.length > 0 ? watch(dependencies) : [];
+
+  const isDisabled =
+    dependencies && dependencies.length > 0
+      ? values.some((value) => !value)
+      : false;
 
   return (
     <div className="w-full flex flex-col gap-1">
@@ -25,6 +39,7 @@ export const InputCheckBox = ({ name, options, required }: CheckBoxType) => {
               required,
             })}
             value={option.value}
+            disabled={isDisabled}
           />
           <label>{option.label}</label>
         </div>

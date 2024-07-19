@@ -13,6 +13,7 @@ type FormFieldType = {
   type: "select" | "checkbox";
   options: OptionType[];
   required?: boolean;
+  dependencies?: Array<string>;
 };
 
 export const FormField = ({
@@ -21,15 +22,26 @@ export const FormField = ({
   type,
   options,
   required,
+  dependencies,
 }: FormFieldType) => (
   <div className="w-full flex flex-col gap-2">
     <div className="w-full flex flex-col">
       <label>{label}</label>
       {type === "select" && (
-        <InputSelect name={name} options={options} required={required} />
+        <InputSelect
+          name={name}
+          options={options}
+          required={required}
+          dependencies={dependencies}
+        />
       )}
       {type === "checkbox" && (
-        <InputCheckBox name={name} options={options} required={required} />
+        <InputCheckBox
+          name={name}
+          options={options}
+          required={required}
+          dependencies={dependencies}
+        />
       )}
     </div>
     <div>

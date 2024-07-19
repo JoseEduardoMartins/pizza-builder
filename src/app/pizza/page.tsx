@@ -23,22 +23,24 @@ export default function Pizza() {
                 label="Escolha o tamanho da pizza:"
                 name="size"
                 type="select"
-                required={true}
                 options={sizes}
+                required={true}
               />
               <FormField
                 label="Escolha o sabor da pizza:"
                 name="flavor"
                 type="select"
-                required={true}
                 options={flavors}
+                required={true}
+                dependencies={["size"]}
               />
               <FormField
                 label="Personalize sua pizza:"
                 name="customizations"
                 type="checkbox"
-                required={false}
                 options={customizations}
+                required={false}
+                dependencies={["size", "flavor"]}
               />
               <Button>Salvar</Button>
             </Form>
