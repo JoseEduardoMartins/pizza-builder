@@ -1,17 +1,13 @@
 import { FormFieldError } from "./formFieldError";
 import { InputCheckBox } from "./input/inputCheckbox";
 import { InputSelect } from "./input/inputSelect";
-
-type OptionType = {
-  label: string;
-  value: string | number;
-};
+import { Option } from "@/utils/pizza-utils";
 
 type FormFieldType = {
   label: string;
   name: string;
   type: "select" | "checkbox";
-  options: OptionType[];
+  options: Option[];
   required?: boolean;
   dependencies?: Array<string>;
 };

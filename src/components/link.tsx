@@ -12,7 +12,7 @@ const sizeClass = {
   big: " text-2xl",
 };
 
-export type LinkType = {
+type LinkType = {
   href: string;
   theme?: "white" | "emerald";
   size?: "small" | "average" | "big";

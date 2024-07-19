@@ -1,13 +1,9 @@
 import { useFormContext } from "react-hook-form";
+import { Option } from "@/utils/pizza-utils";
 
-type OptionType = {
-  label: string;
-  value: string | number;
-};
-
-export type CheckBoxType = {
+type CheckBoxType = {
   name: string;
-  options: OptionType[];
+  options: Option[];
   required?: boolean;
   dependencies?: Array<string>;
 };

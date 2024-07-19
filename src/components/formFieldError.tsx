@@ -1,7 +1,7 @@
 import { useFormContext } from "react-hook-form";
 import { IoIosWarning } from "react-icons/io";
 
-export type FormFieldErrorType = {
+type FormFieldErrorType = {
   name: string;
 };
 

@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-export type ButtonIconType = {
+type ButtonIconType = {
   type?: "submit" | "button";
   onClick?: () => void;
   children: ReactNode;
@@ -10,12 +10,11 @@ export const ButtonIcon = ({
   type = "submit",
   onClick,
   children,
-}: ButtonIconType) => {
-  return (
-    <button
-      type={type}
-      onClick={onClick}
-      className="
+}: ButtonIconType) => (
+  <button
+    type={type}
+    onClick={onClick}
+    className="
         p-2
         border
         border-transparent
@@ -26,8 +25,7 @@ export const ButtonIcon = ({
         text-white
         text-button-lg
       "
-    >
-      {children}
-    </button>
-  );
-};
+  >
+    {children}
+  </button>
+);

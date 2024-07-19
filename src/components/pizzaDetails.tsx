@@ -1,4 +1,4 @@
-import { PizzaType } from "@/contexts/OrderContext";
+import { PizzaType } from "@/services/pizza-service";
 import { MdDelete } from "react-icons/md";
 import { ButtonIcon } from "./buttonIcon";
 

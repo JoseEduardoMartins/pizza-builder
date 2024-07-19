@@ -1,17 +1,16 @@
 import { ReactNode } from "react";
 
-export type ButtonType = {
+type ButtonType = {
   type?: "submit" | "button";
   onClick?: () => void;
   children: ReactNode;
 };
 
-export const Button = ({ type = "submit", onClick, children }: ButtonType) => {
-  return (
-    <button
-      type={type}
-      onClick={onClick}
-      className="
+export const Button = ({ type = "submit", onClick, children }: ButtonType) => (
+  <button
+    type={type}
+    onClick={onClick}
+    className="
         flex
         justify-center
         items-center
@@ -28,8 +27,7 @@ export const Button = ({ type = "submit", onClick, children }: ButtonType) => {
         text-white
         text-button-lg
       "
-    >
-      {children}
-    </button>
-  );
-};
+  >
+    {children}
+  </button>
+);

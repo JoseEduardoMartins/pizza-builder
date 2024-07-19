@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { FormProvider, UseFormReturn } from "react-hook-form";
 
-export type FormType = {
+type FormType = {
   methods: UseFormReturn<any>;
   handleSubmit: (data: any) => void;
   children: ReactNode;

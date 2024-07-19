@@ -3,7 +3,7 @@
 import { PizzaType } from "@/services/pizza-service";
 import { ReactNode, createContext, useLayoutEffect, useState } from "react";
 
-export type OrderContextTpe = {
+type OrderContextTpe = {
   items: PizzaType[];
   price: number;
   time: number;
@@ -14,7 +14,7 @@ export type OrderContextTpe = {
 
 export const OrderContext = createContext({} as OrderContextTpe);
 
-export type OrderProviderType = {
+type OrderProviderType = {
   children: ReactNode;
 };
 
