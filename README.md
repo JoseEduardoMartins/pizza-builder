@@ -21,9 +21,9 @@ Opção 2
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/JoseEduardoMartins/test-frontend-assemble-pizza.git
+git clone https://github.com/JoseEduardoMartins/pizza-builder.git
 
-cd test-frontend-assemble-pizza
+cd pizza-builder
 ```
 
 ### 2. Configurar ambiente.
@@ -56,6 +56,12 @@ Os arquivos resultantes estarão na pasta build/.
 
 #### Opção 2: Utilizando Docker
 
+- Criar versão otimizada para o docker:
+
+  ```bash
+  npm run build
+  ```
+
 - Inicie a aplicação:
 
   ```bash
@@ -85,7 +91,7 @@ Acesse http://localhost:3000 em seu navegador.
 
 ## Contribuição
 
-Contribuições são bem-vindas! Se encontrar algum problema ou tiver sugestões, por favor, abra uma [issue](https://github.com/JoseEduardoMartins/test-frontend-assemble-pizza/issues/new).
+Contribuições são bem-vindas! Se encontrar algum problema ou tiver sugestões, por favor, abra uma [issue](https://github.com/JoseEduardoMartins/pizza-builder/issues/new).
 
 ## Autor
 
